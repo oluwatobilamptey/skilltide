@@ -100,11 +100,15 @@
     
     ;; Delete profile
     (map-delete user-profiles tx-sender)
+    
+    ;; Decrement total profiles
+    (var-set total-profiles (- (var-get total-profiles) u1))
+    
     (ok true)
   )
 )
 
-;; Optional: Count total number of user profiles
+;; Count total number of user profiles
 (define-read-only (get-total-profiles)
-  (len (map-keys user-profiles))
+  (var-get total-profiles)
 )
